@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border;
+}
+body{
+    font-family: Arial;
+    padding: 20px;
+    text-align: center;
+    background-color:black;
+}
+h1{ margin-bottom: 20px;}
+.Products{ display: grid;
+     grid-template-columns: 1fr;
+      gap: 20px;}
+img{ width: 100%;
+     border-radius: 8px;
+    }
+button{margin-top: 10px; 
+    padding: 8px 15px;}
+@media(min-width:768px){
+    body{ 
+    font-size: 18px;} 
+.Products{grid-template-columns:
+     repeat(2,1fr);}}
+@media(min-width:1024px)
+{body{ 
+    font-size: 20px;} 
+.Products{grid-template-columns:
+     repeat(3,1fr);}
+.card p{display: none;}}
+nav{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: rgb(156, 233, 208);
+    background-color: rgb(156, 85, 215);
+}

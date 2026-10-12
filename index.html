@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#10131d">
+	<title>Vinutha · Project Showcase</title>
+	<style>
+		:root{color-scheme:dark;--bg:#10131d;--panel:#191e2b;--panel2:#202738;--line:#2d3548;--text:#f3f5fb;--muted:#9ca7bb;--accent:#a78bfa;--cyan:#69e1db}
+		*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#282044 0,transparent 36%),var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+		a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}
+		header{padding:28px 0;border-bottom:1px solid #ffffff12}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:.2px}.mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#a78bfa,#69e1db);color:#141321;font-weight:900}.navlinks{display:flex;gap:18px;color:var(--muted);font-size:14px}.navlinks a:hover{color:white}
+		.hero{padding:64px 0 32px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px}.eyebrow{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.04;letter-spacing:-2px;margin:13px 0 14px}.hero p{max-width:620px;color:var(--muted);margin:0}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 15px;border-radius:10px;cursor:pointer;font-weight:650;transition:.18s}.btn:hover{border-color:var(--accent);transform:translateY(-1px)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#191428}
+		.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0 34px}.stat,.toolbar,.group,.empty{border:1px solid var(--line);background:#191e2bd9;border-radius:15px}.stat{padding:17px 19px}.stat strong{display:block;font-size:24px}.stat span{color:var(--muted);font-size:13px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 14px}.section-head h2{font-size:19px;margin:0}.status{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:8px}.dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px #69e1db88}.dot.busy{background:#f6bd60;box-shadow:0 0 12px #f6bd6088}.dot.error{background:#ff7373;box-shadow:0 0 12px #ff737388}
+		.toolbar{display:flex;gap:12px;align-items:center;padding:11px;margin-bottom:18px}.search{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);padding:6px 8px}.search::placeholder{color:#778197}.toolbar select{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;outline:none}
+		#projects{display:grid;gap:15px}.group{padding:18px}.group-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.group-title h3{margin:0;font-size:16px;overflow-wrap:anywhere}.count{color:var(--muted);font-size:12px}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:12px}.card{min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,#202738,#191e2b);border-radius:12px;padding:15px;transition:.18s}.card:hover{border-color:#a78bfa88;transform:translateY(-2px)}.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.file-icon{font-size:21px}.file-name{font-weight:700;overflow-wrap:anywhere}.file-path{color:var(--muted);font-size:12px;margin-top:5px;overflow-wrap:anywhere}.card-actions{display:flex;gap:8px;margin-top:14px}.small-btn{padding:6px 10px;border-radius:7px;background:#ffffff09;border:1px solid var(--line);font-size:12px;color:var(--text);cursor:pointer}.small-btn:hover{border-color:var(--accent)}
+		.empty{padding:34px;text-align:center;color:var(--muted)}.footer{padding:34px 0 45px;color:var(--muted);font-size:12px;text-align:center}.footer a{color:var(--accent)}.modal{position:fixed;inset:0;background:#070910d9;display:none;align-items:center;justify-content:center;padding:22px;z-index:5}.modal.open{display:flex}.modal-box{width:min(960px,100%);height:min(82vh,760px);background:#151a26;border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden}.modal-head{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-title{overflow-wrap:anywhere;font-weight:700}.close{border:0;background:transparent;color:white;font-size:25px;cursor:pointer}.preview-frame{border:0;background:white;flex:1;width:100%}pre{margin:0;overflow:auto;padding:20px;white-space:pre-wrap;word-break:break-word;color:#dce3f5;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}
+		@media(max-width:650px){.wrap{width:min(100% - 26px,1180px)}.hero{padding-top:43px;grid-template-columns:1fr}.hero-actions{justify-content:flex-start}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:20px}.navlinks{gap:10px;font-size:12px}.toolbar{flex-wrap:wrap}.search{flex-basis:100%}.toolbar select{flex:1}}
+	</style>
+</head>
+<body>
+	<header><div class="wrap nav"><a class="brand" href="#"><span class="mark">V</span><span>Vinutha <span style="color:var(--muted);font-weight:500">/ showcase</span></span></a><nav class="navlinks"><a href="#work">Projects</a><a id="repoNav" target="_blank" rel="noopener">GitHub ↗</a></nav></div></header>
+	<main class="wrap">
+		<section class="hero"><div><div class="eyebrow">A live portfolio from GitHub</div><h1>Ideas, built<br>and brought to life.</h1><p>This showcase reads the files in the <strong>vinutha</strong> folder of the repository and keeps the project list up to date automatically.</p></div><div class="hero-actions"><a class="btn primary" href="#work">Explore projects ↓</a><a class="btn" id="repoButton" target="_blank" rel="noopener">View repository ↗</a></div></section>
+		<section class="stats" aria-label="Repository statistics"><div class="stat"><strong id="projectCount">—</strong><span>Projects / folders</span></div><div class="stat"><strong id="fileCount">—</strong><span>Files discovered</span></div><div class="stat"><strong id="lastUpdated">Loading</strong><span>Last synced</span></div></section>
+		<section id="work"><div class="section-head"><h2>Project files</h2><div class="status"><span class="dot busy" id="statusDot"></span><span id="statusText">Connecting to GitHub…</span></div></div>
+			<div class="toolbar"><input class="search" id="search" type="search" placeholder="Search projects and files…" aria-label="Search projects and files"><select id="typeFilter" aria-label="Filter by file type"><option value="all">All file types</option><option value="web">Web pages</option><option value="images">Images</option><option value="documents">Documents</option><option value="code">Code</option></select><button class="btn" id="refreshButton" type="button">↻ Refresh</button></div>
+			<div id="projects"><div class="empty">Loading repository files…</div></div>
+		</section>
+	</main>
+	<footer class="wrap footer">Automatically synced from <a id="repoFooter" target="_blank" rel="noopener">Vinutha152006/fd-lab</a> · Updates every 60 seconds</footer>
+	<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="File preview"><div class="modal-box"><div class="modal-head"><div class="modal-title" id="modalTitle"></div><button class="close" id="closeModal" aria-label="Close preview">×</button></div><div id="modalBody" style="display:flex;flex:1;min-height:0;overflow:auto"></div></div></div>
+	<script>
+		(()=>{
+			const owner='Vinutha152006', repo='fd-lab', branch='main', root='vinutha';
+			const repoUrl=`https://github.com/${owner}/${repo}/tree/${branch}/${root}`;
+			const rawBase=`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/`;
+			const apiUrl=`https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+			const $=id=>document.getElementById(id), projects=$('projects');
+			[$('repoNav'),$('repoButton'),$('repoFooter')].forEach(a=>a.href=repoUrl);
+			let files=[], busy=false;
+			const ext=p=>(p.split('/').pop().split('.').pop()||'').toLowerCase();
+			const kind=p=>{const e=ext(p);if(['html','htm'].includes(e))return'web';if(['png','jpg','jpeg','gif','webp','svg','avif'].includes(e))return'images';if(['pdf','doc','docx','txt','md'].includes(e))return'documents';return'code'};
+			const icon=p=>({html:'🌐',htm:'🌐',css:'🎨',js:'⚡',ts:'⚡',jsx:'⚛️',tsx:'⚛️',py:'🐍',java:'☕',json:'📋',md:'📝',txt:'📄',pdf:'📕',png:'🖼️',jpg:'🖼️',jpeg:'🖼️',svg:'🖼️',zip:'🗜️'})[ext(p)]||'📄';
+			function setStatus(text,state='ok'){$('statusText').textContent=text;$('statusDot').className='dot'+(state==='busy'?' busy':state==='error'?' error':'')}
+			function syncLabel(){ $('lastUpdated').textContent=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); }
+			async function loadFiles(){if(busy)return;busy=true;setStatus('Syncing from GitHub…','busy');$('refreshButton').disabled=true;
+				try{
+					const response=await fetch(apiUrl,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+					if(!response.ok)throw new Error(response.status===403?'GitHub API rate limit reached. Try again shortly.':`GitHub responded with ${response.status}.`);
+					const data=await response.json();if(data.truncated)throw new Error('Repository tree is too large to load completely.');
+					files=(data.tree||[]).filter(item=>item.type==='blob'&&item.path.startsWith(root+'/')).map(item=>({path:item.path, name:item.path.split('/').pop(), url:rawBase+item.path.split('/').map(encodeURIComponent).join('/')}));
+					syncLabel();render();setStatus(`Live · checked ${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`);
+				}catch(error){setStatus(error.message,'error');if(!files.length)projects.innerHTML=`<div class="empty">${escapeHtml(error.message)}<br><br><button class="btn" onclick="document.getElementById('refreshButton').click()">Try again</button></div>`}
+				finally{busy=false;$('refreshButton').disabled=false}
+			}
+			function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+			function render(){
+				const query=$('search').value.trim().toLowerCase(), filter=$('typeFilter').value;
+				const visible=files.filter(f=>(filter==='all'||kind(f.path)===filter)&&(!query||f.path.toLowerCase().includes(query)));
+				const dirs=[...new Set(files.map(f=>f.path.split('/').slice(1,-1).join('/')||'Root'))];
+				$('fileCount').textContent=files.length;$('projectCount').textContent=dirs.length;
+				if(!files.length){projects.innerHTML='<div class="empty">No files found in the vinutha folder yet.</div>';return}
+				if(!visible.length){projects.innerHTML='<div class="empty">No files match your search or selected type.</div>';return}
+				const groups=new Map();visible.forEach(f=>{const folder=f.path.split('/').slice(1,-1).join('/')||'Root';if(!groups.has(folder))groups.set(folder,[]);groups.get(folder).push(f)});
+				projects.innerHTML=[...groups].sort((a,b)=>a[0].localeCompare(b[0])).map(([folder,items])=>`<section class="group"><div class="group-title"><h3>${folder==='Root'?'📁 Root':`📁 ${escapeHtml(folder)}`}</h3><span class="count">${items.length} ${items.length===1?'file':'files'}</span></div><div class="cards">${items.map(f=>`<article class="card"><div class="card-top"><span class="file-icon">${icon(f.path)}</span><span class="count">${kind(f.path)}</span></div><div class="file-name">${escapeHtml(f.name)}</div><div class="file-path">${escapeHtml(f.path)}</div><div class="card-actions"><button class="small-btn preview" data-path="${escapeHtml(f.path)}">Preview</button><a class="small-btn" href="https://github.com/${owner}/${repo}/blob/${branch}/${f.path.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">Open on GitHub ↗</a></div></article>`).join('')}</div></section>`).join('');
+				projects.querySelectorAll('.preview').forEach(btn=>btn.addEventListener('click',()=>preview(files.find(f=>f.path===btn.dataset.path))));
+			}
+			async function preview(file){if(!file)return;const modal=$('modal'),body=$('modalBody');$('modalTitle').textContent=file.path;body.innerHTML='<div class="empty" style="border:0;width:100%">Loading preview…</div>';modal.classList.add('open');
+				if(['html','htm'].includes(ext(file.path))){body.innerHTML=`<iframe class="preview-frame" sandbox="allow-scripts" src="${file.url}" title="${escapeHtml(file.name)} preview"></iframe>`;return}
+				if(['png','jpg','jpeg','gif','webp','svg','avif'].includes(ext(file.path))){body.innerHTML=`<div style="display:grid;place-items:center;width:100%;padding:20px;background:#10131d"><img src="${file.url}" alt="${escapeHtml(file.name)}" style="max-width:100%;max-height:100%;object-fit:contain"></div>`;return}
+				if(ext(file.path)==='pdf'){body.innerHTML=`<iframe class="preview-frame" src="${file.url}" title="${escapeHtml(file.name)} preview"></iframe>`;return}
+				try{const response=await fetch(file.url);if(!response.ok)throw new Error('Could not load this file.');const text=await response.text();if(!modal.classList.contains('open'))return;body.innerHTML='';const pre=document.createElement('pre');pre.textContent=text.slice(0,200000);body.appendChild(pre)}catch(e){body.innerHTML=`<div class="empty" style="border:0;width:100%">${escapeHtml(e.message)} <a href="${file.url}" target="_blank" style="color:var(--accent)">Open raw file ↗</a></div>`}
+			}
+			$('search').addEventListener('input',render);$('typeFilter').addEventListener('change',render);$('refreshButton').addEventListener('click',loadFiles);
+			$('closeModal').addEventListener('click',()=>$('modal').classList.remove('open'));$('modal').addEventListener('click',e=>{if(e.target===$('modal'))$('modal').classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')$('modal').classList.remove('open')});
+			loadFiles();setInterval(loadFiles,60000);
+		})();
+	</script>
+</body>
+</html>

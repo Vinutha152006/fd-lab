@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Student JSON CRUD</title>
+	<style>
+		body{font-family:Arial,sans-serif;max-width:1000px;margin:30px auto;padding:0 16px;background:#f4f7fb;color:#1f2937}h1{color:#123b66}.card{background:#fff;padding:20px;margin:16px 0;border-radius:10px;box-shadow:0 2px 9px #0002}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}label{font-weight:bold}input{display:block;width:100%;box-sizing:border-box;padding:9px;margin-top:5px;border:1px solid #bbc5d1;border-radius:5px}button{padding:9px 13px;border:0;border-radius:5px;background:#1769aa;color:#fff;cursor:pointer;margin:2px}button:hover{opacity:.85}.danger{background:#c62828}.edit{background:#2e7d32}.cancel{background:#687585}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}th{background:#e8f1fa}.table-wrap{overflow:auto}#status{color:#176b36;min-height:20px}
+	</style>
+</head>
+<body>
+	<h1>Student Database</h1>
+	<section class="card">
+		<form id="studentForm">
+			<input type="hidden" id="studentId">
+			<label>Name<input id="studentName" required></label>
+			<label>Email<input id="studentEmail" type="email" required></label>
+			<label>Course<input id="studentCourse" required></label>
+			<label>Age<input id="studentAge" type="number" min="1" max="120" required></label>
+			<div><button id="submitButton">Add Student</button><button type="button" class="cancel" id="cancelButton" hidden>Cancel</button></div>
+		</form>
+		<div id="status" aria-live="polite"></div>
+	</section>
+	<section class="card">
+		<h2>Students</h2>
+		<div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Age</th><th>Actions</th></tr></thead><tbody id="studentRows"></tbody></table></div>
+	</section>
+	<script>
+		const key='students-json-database';
+		let students=JSON.parse(localStorage.getItem(key)||'[]');
+		const $=id=>document.getElementById(id);
+		const escapeHtml=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+		function persist(){localStorage.setItem(key,JSON.stringify(students));}
+		function nextStudentId(){return students.reduce((max,s)=>{const id=Number(s.id);return Number.isFinite(id)&&id>max?id:max;},0)+1;}
+		function render(){
+			$('studentRows').innerHTML=students.length?students.map(s=>`<tr><td>${s.id}</td><td>${escapeHtml(s.name)}</td><td>${escapeHtml(s.email)}</td><td>${escapeHtml(s.course)}</td><td>${s.age}</td><td><button class="edit" onclick="editStudent('${s.id}')">Edit</button><button class="danger" onclick="deleteStudent('${s.id}')">Delete</button></td></tr>`).join(''):'<tr><td colspan="6">No students found.</td></tr>';
+		}
+		function reset(){ $('studentForm').reset();$('studentId').value='';$('submitButton').textContent='Add Student';$('cancelButton').hidden=true; }
+		$('studentForm').onsubmit=e=>{e.preventDefault();const id=$('studentId').value;const data={name:$('studentName').value.trim(),email:$('studentEmail').value.trim(),course:$('studentCourse').value.trim(),age:Number($('studentAge').value)};if(id){students=students.map(s=>String(s.id)===id?{...s,id:s.id,...data}:s);$('status').textContent='Student updated.';}else{students.push({id:nextStudentId(),...data});$('status').textContent='Student added.';}persist();render();reset();};
+		window.editStudent=id=>{const s=students.find(x=>String(x.id)===String(id));if(!s)return;$('studentId').value=s.id;$('studentName').value=s.name;$('studentEmail').value=s.email;$('studentCourse').value=s.course;$('studentAge').value=s.age;$('submitButton').textContent='Update Student';$('cancelButton').hidden=false;};
+		window.deleteStudent=id=>{if(confirm('Delete this student?')){students=students.filter(s=>String(s.id)!==String(id));persist();render();$('status').textContent='Student deleted.';}};
+		$('cancelButton').onclick=reset;render();
+	</script>
+</body>
+</html>
